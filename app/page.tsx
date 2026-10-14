@@ -1,6 +1,7 @@
 
 import Link from "next/link";
 import { getProducts } from "@/lib/api";
+import ProductSearch from "@/components/ProductSearch";
 
 export const instant = false;
 
@@ -119,7 +120,7 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen overflow-hidden bg-[#f8faf5] text-[#17251c]">
-      {/* Hero section */}
+      {/* Hero */}
       <section className="relative overflow-hidden bg-[#17251c] text-white">
         <div
           aria-hidden="true"
@@ -220,7 +221,7 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Category navigation */}
+      {/* Categories */}
       <section className="mx-auto max-w-7xl px-4 pt-12 sm:px-6 lg:px-8">
         <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
           <div>
@@ -252,7 +253,7 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Price movement sections */}
+      {/* Price changes */}
       {hasError ? (
         <p className="mx-auto max-w-7xl px-4 py-12 text-center text-red-700 sm:px-6 lg:px-8">
           দুঃখিত, পণ্যের তথ্য এখন লোড করা যাচ্ছে না। কিছুক্ষণ পরে আবার চেষ্টা করুন।
@@ -317,7 +318,7 @@ export default async function Home() {
         </>
       )}
 
-      {/* All products */}
+      {/* All products and search */}
       <section
         id="সব-পণ্য"
         className="mx-auto max-w-7xl scroll-mt-8 px-4 pb-20 pt-16 sm:px-6 lg:px-8"
@@ -349,20 +350,8 @@ export default async function Home() {
           <p className="rounded-2xl border border-red-100 bg-red-50 p-5 text-red-700">
             পণ্য লোড করা যায়নি। কিছুক্ষণ পরে আবার চেষ্টা করুন।
           </p>
-        ) : products.length > 0 ? (
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
         ) : (
-          <div className="rounded-2xl border border-dashed border-gray-300 bg-white p-10 text-center">
-            <span className="text-4xl">🧺</span>
-            <p className="mt-4 font-bold">এখন কোনো পণ্য পাওয়া যায়নি।</p>
-            <p className="mt-2 text-sm text-gray-500">
-              পরে আবার চেষ্টা করুন।
-            </p>
-          </div>
+          <ProductSearch products={products} />
         )}
       </section>
 
